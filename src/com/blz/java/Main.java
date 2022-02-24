@@ -1,130 +1,48 @@
 package com.blz.java;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
-import java.util.ListIterator;
+import java.util.LinkedList;
 
 import java.util.Scanner;
 
 public class Main {
-	public class AddressBook {
-		public static void main(String[]Args) {
-			ArrayList<Contact> array = new ArrayList<Contact>();
-			try (Scanner sc = new Scanner(System.in)) {
-				try (Scanner sc1 = new Scanner(System.in)) {
-					int choice;
-					do {
-						System.out.println("1.Adding New Contact");
-						System.out.println("2.Check Added Contact");
-						System.out.println("3.Edit Added Contact");
-						System.out.println("4.Delete Added Contact");
-						System.out.println("Enter your Choice");
-						choice = sc.nextInt();
+	static Scanner scanner = new Scanner(System.in);
+    LinkedList<AddressBook> addressbooks = new LinkedList<>();
+    HashMap<Integer, AddressBook> addressbookNum = new HashMap<>();
 
-						switch (choice) {
-						case 1:
-							System.out.print("Enter First Name: ");
-							String firstName1 = sc1.nextLine();
-							System.out.print("Enter last Name: ");
-							String lastName = sc1.nextLine();
-							System.out.print("Enter your address: ");
-							String address = sc1.nextLine();
-							System.out.print("Enter your city: ");
-							String city = sc1.nextLine();
-							System.out.print("Enter your state: ");
-							String state = sc1.nextLine();
-							System.out.print("Enter zip code : ");
-							int zipcode = sc.nextInt();
-							System.out.print("Enter phone number: ");
-							String phoneNo = sc1.nextLine();
-							System.out.print("Enter your email: ");
-							String email = sc1.nextLine();
-							Contact contact = new Contact(firstName1, lastName, address, city, zipcode, state, phoneNo,
-									email);
-							array.add(contact);
-							break;
-					
-						case 2:
-							java.util.Iterator<Contact> iterator = array.iterator();
-							while (iterator.hasNext()) {
-								contact = iterator.next();
-								System.out.println(array);
-								break;
-							}
-							
-						case 3:
-							boolean found = false;
-							System.out.println("Enter first name of the person for update ");
-							firstName1 = sc1.nextLine();
-
-							ListIterator<Contact> listIterator = array.listIterator();
-
-							while (listIterator.hasNext()) {
-								contact = listIterator.next();
-								
-								if (contact.getFirstName().equals(firstName1)) {
-
-									System.out.print("Enter new first Name: ");
-									firstName1 = sc1.nextLine();
-									System.out.print("Enter new last Name: ");
-									lastName = sc1.nextLine();
-									System.out.print("Enter your new address: ");
-									address = sc1.nextLine();
-									System.out.print("Enter your new city: ");
-									city = sc1.nextLine();
-									System.out.print("Enter your state: ");
-									state = sc1.nextLine();
-									System.out.print("Enter zip code : ");
-									zipcode = sc.nextInt();
-									System.out.print("Enter phone number: ");
-									phoneNo = sc1.nextLine();
-									System.out.print("Enter your email ID: ");
-									email = sc1.nextLine();
-									listIterator.set(new Contact(firstName1, lastName, address, city, zipcode, state,
-											phoneNo, email));
-									found = true;
-								}
-							}
-
-							if (!found) {
-								System.out.println("Record not found");
-							} else {
-								System.out.println("Record is updated successfully");
-							}
-							break;
-
-						case 4:
-							found = false;
-							System.out.println("Enter first name of the person for delete ");
-							firstName1 = sc1.nextLine();
-							iterator = array.iterator();
-							while (iterator.hasNext()) {
-								contact = iterator.next();
-								if (contact.getFirstName().equals(firstName1)) {
-									iterator.remove();
-									found = true;
-								}
-							}
-							
-							if (!found) {
-								System.out.println("Record not found");
-							} else {
-								System.out.println("Record is deleted successfully");
-							}
-							break;
-
-						default:
-							System.out.println("default");
-
-						}
-					} while (choice != 0);
-					System.out.println("Invalid Choice!!");
-				}
-			}	
+    public void addMultipleAddressBook() {
+	while (true) {
+	    System.out.println("Enter the \n1)to access address book\n2)0 to exit");
+	    int option = scanner.nextInt();
+	    switch (option) {
+	    case 0:
+		System.out.println("Exiting from addressbooks");
+		System.exit(0);
+		break;
+	    case 1:
+		System.out.println("Enter the addressbook number");
+		int N = scanner.nextInt();
+		System.out.printf("welcome to addressbook_%d\n", N);
+		if (addressbookNum.containsKey(N)) {
+		    System.out.printf("addressbook_%d is already present you cannot add one more time\n", N);
+		    break;
+		} else {
+		    AddressBook addr = new AddressBook();
+		    addr.addMultiplePerson();
+		    addressbookNum.put(N, addr);
+		    break;
 		}
-
-		public void addMultiplePerson() {
-		}	
-
+	    default:
+		System.out.println("select valid option");
+		break;
+	    }
 	}
+    }
+    public static void main(String[] args) {
+	System.out.println("Start with Displaying Welcome to Address Book Program in AddressBookMain class");
+	Main main = new Main();
+	main.addMultipleAddressBook();
+    }
+
 }
