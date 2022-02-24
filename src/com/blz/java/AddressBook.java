@@ -120,5 +120,8 @@ public class AddressBook {
 				System.out.println("Invalid Choice!!");
 			}
 		}	
+	}
+
+	public void addMultiplePerson() {
 	}	
 }
