@@ -55,7 +55,7 @@ public class AddressBook {
 							while (listIterator.hasNext()) {
 								contact = listIterator.next();
 
-								if (contact.getFirstName().equals(firstName1)) { // entering the condition if fname matches
+								if (contact.getFirstName().equals(firstName1)) { 
 
 									System.out.print("Enter new first Name: ");
 									firstName1 = sc1.nextLine();
